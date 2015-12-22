@@ -5,6 +5,8 @@ class Cat < ActiveRecord::Base
   validates :color, inclusion: { in: COAT_COLORS }
   validates :sex, inclusion: { in: GENDER }
 
+  has_many :cat_rental_requests, :dependent => :destroy
+
   def age
     dob = birth_date
     now = Time.now.utc.to_date
