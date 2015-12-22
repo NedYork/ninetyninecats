@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :cats
-  resources :cat_rental_requests
-  
+  # do
+    # resources :cat_rental_requests, only: [:show]
+  # end
+
+  resources :cat_rental_requests, only: [:create]
+
 end
