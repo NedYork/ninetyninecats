@@ -24,22 +24,37 @@
     name="cat[birth_date]"
     value="<%= cat.birth_date %>">
 
-  <br><br><br>
-  <input type="radio" name="cat[sex]" id="cat_sex_female" value="F">
-  <label for="cat_sex_female">Female</label>
-  <br>
 
-  <input type="radio" name="cat[sex]" id="cat_sex_male" value="M">
-  <label for="cat_sex_male">Male</label>
+  <br><br><br>
+  <% Cat::GENDER.each do |gender| %>
+  <% gender_id = (gender == "M" ? 'cat_sex_male' : 'cat_sex_female') %>
+  <% sex_type = (gender == "M" ? 'Male' : 'Female') %>
+
+  <input
+    type="radio"
+    name="cat[sex]"
+    id=<%= gender_id %>
+    value=<%= gender %>
+    <% if cat.sex == gender %>
+      <%= 'checked' %>
+    <% end %>>
+
+  <label for=<%= gender_id %>>
+    <%= sex_type %>
+  </label>
+
+  <% end %>
+
   <br><br><br>
 
   <label for="cat_color">Cat color</label>
   <select name="cat[color]" id="cat_color">
-    <option value="red">Red</option>
-    <option value="black">Black</option>
-    <option value="brown">Brown</option>
-    <option value="yellow">Yellow</option>
-    <option value="white">White</option>
+    <% Cat::COAT_COLORS.each do |color| %>
+      <option value=<%= color %>
+        <% if cat.color == color %>
+          <%= 'selected' %>
+        <% end %>><%= color.upcase %></option>
+    <% end %>
   </select>
   <br> <br> <br>
 

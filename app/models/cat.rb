@@ -1,8 +1,10 @@
 class Cat < ActiveRecord::Base
+  COAT_COLORS = %w(brown red black yellow white)
+  GENDER = %w(M F)
   validates :birth_date, :name, :sex, presence: true
-  validates :color, inclusion: { in: %w(brown red black yellow white) }
-  validates :sex, inclusion: { in: %w(M F) }
-  
+  validates :color, inclusion: { in: COAT_COLORS }
+  validates :sex, inclusion: { in: GENDER }
+
   def age
     dob = birth_date
     now = Time.now.utc.to_date
